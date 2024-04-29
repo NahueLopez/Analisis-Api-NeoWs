@@ -1,4 +1,4 @@
-# API de la NASA - NeoWs
+# Proyecto de analisis de la API de la NASA - NeoWs
 
 ## URL base de la API de la NASA
 url base = 'https://api.nasa.gov/'
