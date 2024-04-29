@@ -20,3 +20,9 @@ Parámetros de consulta:
 4- Verificación y Creación de Tabla: Se verifica si la tabla de datos ya está creada; de lo contrario, se crea una nueva tabla.  
 5- Almacenamiento de Datos: Los datos procesados se insertan en la base de datos.
 
+## Consideraciones Importantes
+
+### Archivos faltantes:
+
+1- Archivo apiKey.py: Este archivo debe contener la variable API_KEY, que es la llave proporcionada por la API de la NASA.  
+2- Archivo dbKey.py: Este archivo debe contener las variables DB_NAME, HOST, PORT, USER y PASSWORD, que corresponden a los datos de la base de datos.  
