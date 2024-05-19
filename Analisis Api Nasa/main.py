@@ -1,6 +1,6 @@
 from dbConnec import establecer_conexion, crear_tabla_dinamica, insertar_datos, verificar_tabla_existente
 from apiData import obtener_datos
-
+from DatosExcel import Verificacion_Excel, insertar_datos_csv
 
 def analizar_json_neo(data):
     # Analizo el JSON de datos de asteroides de la api y guardo los valores relevantes para cada asteroide
@@ -28,25 +28,34 @@ def analizar_json_neo(data):
     return all_values
 
 def main():
+    # Establecer la conexión
     conn = establecer_conexion()
 
     if conn is not None:
-        # Verifico si la tabla existe sino la creo
-        tabla = 'tabla_asteroides'
-        keys = ['id', 'name', 'nasa_jpl_url', 'absolute_magnitude_h', 'close_approach_date', 'relative_velocity', 'miss_distance', 'estimated_diameter_min_kilometers', 'estimated_diameter_max_kilometers']
-        if not verificar_tabla_existente(conn, tabla):
-            crear_tabla_dinamica(conn, tabla)
+        try:
+            # Verificar si la tabla existe sino la creo
+            tabla = 'tabla_asteroides'
+            if not verificar_tabla_existente(conn, tabla):
+                crear_tabla_dinamica(conn, tabla)
 
-        # Obtengo los datos de la api
-        data = obtener_datos()
+            # Obtener los datos de la API
+            data = obtener_datos()
 
-        # Inserto los datos en la db
-        if data:
-            values_list = analizar_json_neo(data)
-            insertar_datos(conn, tabla, values_list)
-            print("Datos insertados correctamente.")
-        else:
-            print("No se pudieron obtener datos de la API NEO de la NASA.")
+            # Insertar los datos en la base de datos
+            if data:
+                values_list = analizar_json_neo(data)
+                insertar_datos(conn, tabla, values_list)
+
+                # Verifica si el archivo Excel Esta creado,sino lo crea
+                Verificacion_Excel("Asteroides.csv")
+                # Inserta los datos en el Excel
+                insertar_datos_csv("Asteroides.csv", values_list)
+
+            else:
+                print("No se pudieron obtener datos de la API NEO de la NASA.")
+        finally:
+            # Cerrar la conexión
+            conn.close()
 
 if __name__ == "__main__":
     main()
