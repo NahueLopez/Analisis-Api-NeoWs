@@ -26,7 +26,7 @@ Se verifica la integridad de los datos para asegurarse de que estén completos y
 2- Conexión con Redshift: Se establece una conexión con la base de datos Redshift.  
 3- Análisis y Guardado de Datos: Se analizan los datos JSON de la API y se guardan los campos relevantes.  
 4- Verificación y Creación de Tabla: Se verifica si la tabla de datos ya está creada; de lo contrario, se crea una nueva tabla.  
-5- Almacenamiento de Datos: Los datos procesados se insertan en la base de datos.
+5- Almacenamiento de Datos: Los datos procesados se insertan en la base de datos  
 6- Verificación y Creación del Excel: Se verifica si el excel de datos ya está creado; de lo contrario, se crea un nuevo excel.
 7- Gestión de Errores: Se implementa un manejo adecuado de errores y excepciones para garantizar que el programa pueda recuperarse de situaciones inesperadas y continuar su ejecución de manera segura.
 
